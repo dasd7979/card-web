@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给姐姐的生日祝福</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7ff 0%, #f9f0ff 100%);
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .star-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: #8b5cf6;
+            border-radius: 50%;
+            animation: twinkle 1.5s infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.8; }
+        }
+
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+            transition: opacity 0.5s;
+        }
+
+        .start-button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #8b5cf6, #6d28d9);
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .content {
+            opacity: 0;
+            transition: opacity 1s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s;
+        }
+
+        .flower-container {
+            position: relative;
+            height: 200px;
+            margin: 20px 0;
+        }
+
+        .camellia {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .camellia:hover {
+            transform: scale(1.1);
+        }
+
+        .memory-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .puppy {
+            max-width: 150px;
+            margin: 20px auto;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .puppy:hover {
+            transform: scale(1.1);
+        }
+
+        .strawberry-bear {
+            max-width: 150px;
+            margin: 20px auto;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .strawberry-bear:hover {
+            transform: scale(1.1);
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: #ff69b4;
+            pointer-events: none;
+            animation: float 2s ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+
+        .final-message {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="star-field"></div>
+    
+    <div class="welcome-screen">
+        <h1 style="color: #8b5cf6; margin-bottom: 20px;">亲爱的姐姐</h1>
+        <p style="color: #666; margin-bottom: 30px">点击下方按钮开启你的生日惊喜 ✨</p>
+        <button class="start-button">开始探索</button>
+    </div>
+
+    <div class="container content">
+        <div class="message" id="message1">
+            在一起的时光，让我看到了生活更美好的样子...
+        </div>
+        
+        <div class="flower-container">
+            <!-- 山茶花会通过JS动态添加 -->
+        </div>
+
+        <div class="message" id="message2">
+            每一朵花都代表着我想对你说的话，试着点击它们...
+        </div>
+
+        <img src="G.jpg" alt="Puppy" class="puppy" id="puppy">
+        
+        <div class="message" id="message3">
+            就像这只小狗一样，永远陪伴在你身边...
+        </div>
+
+        <img src="m.jpg" alt="Strawberry Bear" class="strawberry-bear" id="strawberryBear">
+        
+        <div class="memory-box" id="memoryBox">
+            谢谢你像礼物一样出现在我的生命里，让我原本普通的日子突然有了光。
+            每次想到你笑起来的样子、认真说话的语气、甚至偶尔的小脾气，都会忍不住觉得：能和你一起经历生活的琐碎，真是件幸运的事。
+            新的一岁，希望我能继续做那个最懂你脆弱的人，陪你解锁更多星辰大海，也守护你每一个细微的愿望。
+            不用急着长大，在我这里，你永远可以做个被偏爱的小朋友❤️
+        </div>
+
+        <div class="final-message">
+            生日快乐，我的姐姐！愿你永远被爱包围 ❤️
+        </div>
+    </div>
+
+    <script>
+        // 创建星星背景
+        function createStars() {
+            const starField = document.querySelector('.star-field');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starField.appendChild(star);
+            }
+        }
+
+        // 创建山茶花
+        function createCamellias() {
+            const container = document.querySelector('.flower-container');
+            const messages = [
+                "你的笑容是我最大的幸福",
+                "感谢你让我的生活如此美好",
+                "愿我们的故事继续书写",
+                "每一天都因你而特别",
+                "有你的日子都是晴天"
+            ];
+            
+            messages.forEach((msg, index) => {
+                const flower = document.createElement('div');
+                flower.className = 'camellia';
+                flower.style.left = (index * 20) + '%';
+                flower.style.top = Math.random() * 100 + 'px';
+                flower.innerHTML = '🌸';
+                flower.dataset.message = msg;
+                
+                flower.addEventListener('click', function(e) {
+                    showHeart(e.pageX, e.pageY);
+                    alert(this.dataset.message);
+                });
+                
+                container.appendChild(flower);
+            });
+        }
+
+        // 创建爱心效果
+        function showHeart(x, y) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = x + 'px';
+            heart.style.top = y + 'px';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 2000);
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            createCamellias();
+            
+            // 开始按钮点击事件
+            document.querySelector('.start-button').addEventListener('click', () => {
+                document.querySelector('.welcome-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.querySelector('.welcome-screen').style.display = 'none';
+                    document.querySelector('.content').style.opacity = '1';
+                    
+                    // 依次显示消息
+                    const messages = document.querySelectorAll('.message');
+                    messages.forEach((msg, index) => {
+                        setTimeout(() => {
+                            msg.style.opacity = '1';
+                            msg.style.transform = 'translateY(0)';
+                        }, index * 1000);
+                    });
+                }, 500);
+            });
+
+            // 小狗点击事件
+            document.getElementById('puppy').addEventListener('click', function() {
+                showHeart(event.pageX, event.pageY);
+                document.getElementById('memoryBox').style.display = 'block';
+            });
+
+            // 草莓熊点击事件
+            document.getElementById('strawberryBear').addEventListener('click', function() {
+                showHeart(event.pageX, event.pageY);
+                document.querySelector('.final-message').style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
